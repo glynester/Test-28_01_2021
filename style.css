@@ -82,10 +82,6 @@ body {
     grid-row-gap: 25px;
   }
 
-  .features-inner img {
-      max-width: 275px;
-  }
-  
   .featured-item h3 {
     color: #283593;
     font-size: 1.5rem;
@@ -110,7 +106,7 @@ h1 {
 }
 
 .photos img {
-    width: 100%;
+    max-width: 275px;
 }
 
 .photos {
