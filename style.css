@@ -78,8 +78,12 @@ body {
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-column-gap: 45px;
-    grid-row-gap: 45px;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+  }
+
+  .features-inner img {
+      max-width: 275px;
   }
   
   .featured-item h3 {
