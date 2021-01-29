@@ -117,6 +117,8 @@ h1 {
 
 .section {
   padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .container {
@@ -125,4 +127,46 @@ h1 {
   background-color: #FFF;
   padding: 50px 80px;
   box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
+}
+
+.shapes {
+  -webkit-transform: skewY(-12deg);
+  transform: skewY(-18deg);
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: .3;
+}
+
+.shape-one {
+  position: absolute;
+  top: 100;
+  left: 0;
+  right: 10%;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #11059E;
+  mix-blend-mode: darken;
+  height: 90px;
+}
+
+.shape-two {
+  position: absolute;
+  top: 180;
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #F00000;
+  mix-blend-mode: darken;
+  height: 90px;
+}
+
+.shape-three {
+  position: absolute;
+  top: 260;
+  left: 10%;
+  right: 0%;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #008F17;
+  mix-blend-mode: darken;
+  height: 90px;
 }
