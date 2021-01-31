@@ -204,11 +204,91 @@ h1 {
   background-size: contain;
   background-position: center center;
   opacity: 0;
-  transform: scale(1);
+  transform: scaleX(1);
   transition: all .9s ease-out;
 }
 
 .slide:nth-last-child(2) {
   opacity: 1;
   transform: scale(1.08);
+}
+
+.boxes {
+  display: flex;
+  width: 100%;
+}
+
+.progress {
+  border: 1px solid #c7c7c7;
+  border-right: none;
+  position: relative;
+}
+
+.progress-inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width:100%;
+  background-color: #7ecc00;
+  opacity: .57;
+  transform: scaleX(0);
+  transform-origin: center left;
+  transition: transform .5s ease-out;
+}
+
+.box {
+  height: 40px;
+  border-right: 1px solid #c7c7c7;
+  flex: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(132, 145, 170, 0.82);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s ease-out;
+  transform: scale(1.2);
+}
+
+body.overlay-is-open .overlay {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+body.overlay-is-open .main-ui {
+  filter: blur(4px);
+}
+
+@keyframes showError {
+  50% {
+    color: red;
+    transform: scale(1.2);
+  }
+  100% {
+    color: #333;
+    transform: scale(1);
+  }
+  
+}
+
+.animate-wrong {
+  animation: .5s showError;
+}
+
+.problem {
+  text-align: center;
+  font-size: 6em;
+}
+
+.main-ui {
+  text-align: center;
 }

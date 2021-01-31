@@ -84,4 +84,100 @@ function createSlideShow(images){
     // })}`;
 }
 
-start();
+// start();
+
+const problemElement=document.querySelector(".problem");
+const gameForm=document.querySelector(".gameForm");
+const gameField=document.querySelector(".gameField");
+const pointsNeeded=document.querySelector(".points-needed");
+const triesAllowed=document.querySelector(".tries-allowed");
+const progBar=document.querySelector(".progress-inner");
+const endMessage=document.querySelector(".end-message");
+const resetButton=document.querySelector(".reset-button");
+
+let state={
+    score:0,
+    wrongAnswers: 0
+}
+
+function updateProblem(){
+    state.currentProblem=generateProblem();
+    problemElement.innerHTML=`${state.currentProblem.numberOne} ${state.currentProblem.operator} ${state.currentProblem.numberTwo}`;
+    gameField.value='';
+    gameField.focus();
+}
+
+// updateProblem();
+
+function generateNumber(max){
+    return Math.floor(Math.random() * (max + 1));
+}
+
+function generateProblem(){
+    return {
+        numberOne: generateNumber(10),
+        numberTwo: generateNumber(10),
+        operator: ['+', '-', 'x'][generateNumber(2)]
+    }
+}
+
+gameForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event){
+    event.preventDefault();
+    let correctAnswer, p=state.currentProblem;
+    if (p.operator=='+'){ correctAnswer=p.numberOne+p.numberTwo; } 
+    if (p.operator=='-') { correctAnswer=p.numberOne-p.numberTwo; } 
+    if (p.operator=='x') { correctAnswer=p.numberOne*p.numberTwo; }
+    if (parseInt(gameField.value,10)==correctAnswer){
+        state.score++;
+        pointsNeeded.textContent=10-state.score;
+        updateProblem();
+        renderProgressBar();
+        // alert("Good job!"+ correctAnswer + gameField.value);
+    } else {
+        state.wrongAnswers++;
+        // alert("Wrong Dude!" + correctAnswer + gameField.value);
+        triesAllowed.textContent=3-state.wrongAnswers;
+        problemElement.classList.add("animate-wrong");
+        setTimeout(_=>problemElement.classList.remove("animate-wrong"),500);
+    }
+    checkLogic();
+}
+
+function checkLogic(){
+    // you won
+    if (state.score==10){
+        endMessage.textContent="Congratulations, you won pal!!!";
+        document.body.classList.add("overlay-is-open");
+        setTimeout(_=>resetButton.focus(),500);
+     }
+    // you lost
+    if (state.wrongAnswers==3){
+        endMessage.textContent="Bad luck, you lost matey!!!";
+        document.body.classList.add("overlay-is-open");
+        setTimeout(_=>resetButton.focus(),500);
+    }
+}
+
+resetButton.addEventListener("click", resetGame);
+
+function resetGame(){
+    document.body.classList.remove("overlay-is-open");
+    updateProblem();
+    state.score=0;
+    state.wrongAnswers=0;
+    pointsNeeded.textContent=10;
+    triesAllowed.textContent=3;
+    renderProgressBar();
+}
+
+function renderProgressBar(){
+    progBar.style.transform=`scaleX(${state.score/10})`;
+}
+
+
+
+
+
+
